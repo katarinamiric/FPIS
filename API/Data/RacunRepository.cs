@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
@@ -29,13 +30,24 @@ namespace API.Data
             }
         }
 
+        public async Task<List<RacunOsiguranja>> FilterRacuni()
+        {
+            var result = await _context.RacuniOsiguranja.ToListAsync();
+            return result;
+        }
+
         public NacinPlacanja GetNacinPlacanja(int nacinPlacanjaId) => _context.NaciniPlacanja.Find(nacinPlacanjaId);
 
-        public RacunOsiguranja GetRacun(int id)
+
+        public async Task<RacunOsiguranja> GetRacun(int id)
         {
-            var result = _context.RacuniOsiguranja
-                .FirstOrDefault(p => p.Id == id);
-            return result;
+            return await _context.RacuniOsiguranja
+                 .Include(x => x.OsiguravajucaKuca)
+                  .Include(x => x.Ugovor)
+                    .Include(x => x.Radnik)
+                    .Include(x => x.NacinPlacanja)
+            .Include(x => x.StavkeRacunaOsiguranja)
+            .FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public Radnik GetRadnik(int radnikId) => _context.Radnici.Find(radnikId);

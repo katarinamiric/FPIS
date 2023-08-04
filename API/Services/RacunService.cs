@@ -2,19 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Controllers;
+using API.Dtos;
 using API.Dtos.Requests;
 using API.Entities;
 using API.Interfaces;
 using API.Responses;
+using AutoMapper;
 
 namespace API.Services
 {
     public class RacunService : IRacunService
     {
         private readonly IRacunRepository _racunRepository;
-        public RacunService(IRacunRepository racunRepository)
+        private readonly IMapper _mapper;
+        public RacunService(IRacunRepository racunRepository, IMapper mapper)
         {
             _racunRepository = racunRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> AddRacun(RacunRequestDto request)
@@ -53,9 +58,38 @@ namespace API.Services
             return response;
         }
 
+        public async Task<List<RacunDto>> FilterRacuni()
+        {
+            var result = await _racunRepository.FilterRacuni();
+            var racuniDto = new List<RacunDto>();
+            foreach (var racun in result)
+            {
+                var racunDto = new RacunDto()
+                {
+                    Id = racun.Id,
+                    BrojUgovora = racun.BrUgovora,
+                    IdNacinaPlacanja = racun.IdNacinaPlacanja,
+                    PozivNaBroj = racun.PozivNaBroj,
+                    IdOsigKuce = racun.IdOsigKuce,
+                    Iznos = racun.Iznos,
+                    Datum = racun.Datum,
+                    SifraRadnika = racun.SifraRadnika,
+                };
+                racuniDto.Add(racunDto);
+            }
+            return racuniDto;
+        }
+
+        public async Task<RacunDto> GetRacun(int id)
+        {
+            var racun = await _racunRepository.GetRacun(id);
+            var racunDto = _mapper.Map<RacunDto>(racun);
+            return racunDto;
+        }
+
         public async Task<bool> UpdateRacun(int id, RacunRequestDto request)
         {
-            var racunPostojeci = _racunRepository.GetRacun(id);
+            var racunPostojeci = await _racunRepository.GetRacun(id);
             var racun = new RacunOsiguranja()
             {
                 PozivNaBroj = request.PozivNaBroj,

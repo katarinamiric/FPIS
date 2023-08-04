@@ -44,6 +44,21 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet(Name = "GetObavestenje")]
+        public async Task<ActionResult<ObavestenjeOIzvrsenojUplatiOsiguranjaDto>> Get(int id, [FromServices] IObavestenjeOIzvrsenojUplatiService obavestenjeOIzvrsenojUplatiService)
+        {
+            try
+            {
+                var obavestenje = await obavestenjeOIzvrsenojUplatiService.GetObavestenjeOIzvrsenojUplati(id);
+                return Ok(obavestenje);
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogError(e.Message);
+                return Problem();
+            }
+        }
+
         [HttpPost("Add")]
         public async Task<ActionResult<bool>> AddObavestenje([FromBody] ObavestenjeRequestDto request,
             [FromServices] IObavestenjeOIzvrsenojUplatiService obavestenjeOIzvrsenojUplatiService)
@@ -65,7 +80,7 @@ namespace API.Controllers
             }
 
         }
-       
+
         [HttpPost("Update")]
         public async Task<ActionResult<bool>> UpdateObavestenje(int id, [FromBody] ObavestenjeRequestDto request,
             [FromServices] IObavestenjeOIzvrsenojUplatiService obavestenjeOIzvrsenojUplatiService)

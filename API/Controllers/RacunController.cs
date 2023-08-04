@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using API.Dtos.Requests;
 using API.Interfaces;
@@ -18,6 +19,52 @@ namespace API.Controllers
         public RacunController(ILogger<RacunController> logger)
         {
             _logger = logger;
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [HttpGet("FilterRacuni")]
+        public async Task<ActionResult<UplatnicaResponse>> FilterRacuni([FromServices] IRacunService racunService)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Error");
+            }
+
+            try
+            {
+                var result = await racunService.FilterRacuni();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Problem sa filtriranjem racuna");
+                return Problem(statusCode: 500);
+            }
+        }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [HttpGet("GetRacun")]
+        public async Task<ActionResult<UplatnicaResponse>> GetRacun(int id, [FromServices] IRacunService racunService)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Error");
+            }
+
+            try
+            {
+                var result = await racunService.GetRacun(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Problem sa dobavljanjem racuna");
+                return Problem(statusCode: 500);
+            }
         }
 
         [HttpPost("Add")]

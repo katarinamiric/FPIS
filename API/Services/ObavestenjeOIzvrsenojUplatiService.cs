@@ -64,6 +64,9 @@ namespace API.Services
         public async Task<ObavestenjeOIzvrsenojUplatiOsiguranjaDto> GetObavestenjeOIzvrsenojUplati(int id)
         {
             var obavestenje = await _obavestenjeRepository.GetObavestenjeOIzvrsenojUplati(id);
+            if(obavestenje == null){
+                throw new Exception($"Ne postoji obavestenje sa Id: {id}");
+            }
             var obavestenjeDto = new ObavestenjeOIzvrsenojUplatiOsiguranjaDto()
             {
                 Id = obavestenje.Id,

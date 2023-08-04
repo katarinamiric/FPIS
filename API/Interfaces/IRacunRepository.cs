@@ -12,7 +12,8 @@ namespace API.Interfaces
         NacinPlacanja GetNacinPlacanja(int nacinPlacanjaId);
         Radnik GetRadnik(int radnikId);
         UgovorOOsiguranju GetUgovor(int brojUgovora);
-        RacunOsiguranja GetRacun(int id);
+        Task<RacunOsiguranja> GetRacun(int id);
         Task<int> UpdateRacun(RacunOsiguranja racun, RacunOsiguranja racunPostojeci);
+        Task<List<RacunOsiguranja>> FilterRacuni();
     }
 }

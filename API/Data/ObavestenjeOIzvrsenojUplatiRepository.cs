@@ -43,6 +43,9 @@ namespace API.Data
         public async Task<ObavestenjeOIzvrsenojUplatiOsiguranja> GetObavestenjeOIzvrsenojUplati(int id)
         {
             return await _context.ObavestenjaOIzvrsenojUplatiOsiguranja
+            .Include(s => s.Uplatnica)
+            .Include(s => s.Radnik)
+            .Include(s => s.OsiguravajucaKuca)
             .FirstOrDefaultAsync(o => o.Id == id);
         }
 

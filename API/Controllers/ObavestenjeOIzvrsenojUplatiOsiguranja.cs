@@ -24,12 +24,7 @@ namespace API.Controllers
         }
 
 
-        [HttpGet(Name = "GetObavestenje")]
-        public async Task<ActionResult<ObavestenjeOIzvrsenojUplatiOsiguranjaDto>> Get(int id)
-        {
-            var obavestenje = await _obavestenjeService.GetObavestenjeOIzvrsenojUplati(id);
-            return Ok(obavestenje);
-        }
+      
         
 
 
