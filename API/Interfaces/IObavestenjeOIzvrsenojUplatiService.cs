@@ -14,5 +14,6 @@ namespace API.Interfaces
         Task<bool> AddObavestenje(ObavestenjeRequestDto request);
         Task<List<ObavestenjeOIzvrsenojUplatiOsiguranjaDto>> GetAllObavestenja();
         Task<bool> UpdateObavestenje(int id, ObavestenjeRequestDto request);
+        Task<bool> DeleteAsync(int? id);
     }
 }

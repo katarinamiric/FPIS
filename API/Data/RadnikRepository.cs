@@ -37,5 +37,20 @@ namespace API.Data
             return await _context.Radnici
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
+
+        public async Task<List<TProjection>> GetNaciniPlacanja<TProjection>(Expression<Func<NacinPlacanja, TProjection>> selector)
+        {
+            try
+            {
+                return await _context.NaciniPlacanja
+                    .AsNoTracking()
+                    .Select(selector)
+                    .ToListAsync();
+            }
+            catch (System.Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

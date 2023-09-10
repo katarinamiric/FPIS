@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using API.Dtos;
 using API.Dtos.Requests;
 using API.Interfaces;
 using API.Responses;
@@ -24,7 +25,7 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [HttpGet("FilterRacuni")]
-        public async Task<ActionResult<UplatnicaResponse>> FilterRacuni([FromServices] IRacunService racunService)
+        public async Task<ActionResult<List<RacunDto>>> FilterRacuni([FromServices] IRacunService racunService)
         {
 
             if (!ModelState.IsValid)
@@ -47,7 +48,7 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [HttpGet("GetRacun")]
-        public async Task<ActionResult<UplatnicaResponse>> GetRacun(int id, [FromServices] IRacunService racunService)
+        public async Task<ActionResult<RacunDto>> GetRacun(int id, [FromServices] IRacunService racunService)
         {
 
             if (!ModelState.IsValid)
@@ -109,5 +110,37 @@ namespace API.Controllers
             }
 
         }
+
+
+ /// <summary>
+        /// Delete Racun
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="racunService"></param>
+        /// <returns></returns>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [HttpPost("Delete/{id:int}")]
+        public async Task<ActionResult<bool>> Delete(int id,
+            [FromServices] IRacunService racunService)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Error");
+                }
+
+                var result = await racunService.DeleteAsync(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return Problem();
+            }
+        }
+
     }
 }

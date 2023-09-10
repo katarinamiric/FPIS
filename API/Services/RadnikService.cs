@@ -25,5 +25,16 @@ namespace API.Services
 
             return radnici;
         }
+
+        public async Task<List<NacinPlacanjaDto>> GetNaciniPlacanja()
+        {
+            var nacini= await _radnikRepository.GetNaciniPlacanja(s => new NacinPlacanjaDto()
+            {
+                Name = s.OpisNacinaPlacanja,
+                Id = s.Id,
+            });
+
+            return nacini;
+        }
     }
 }

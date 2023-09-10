@@ -41,5 +41,28 @@ namespace API.Controllers
                 return Problem(statusCode: 500);
             }
         }
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [HttpGet("GetNaciniPlacanja")]
+        public async Task<ActionResult<List<NacinPlacanjaDto>>> GetNaciniPlacanja([FromServices] IRadnikService radnikService)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Error");
+            }
+
+            try
+            {
+                var result = await radnikService.GetNaciniPlacanja();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Problem");
+                return Problem(statusCode: 500);
+            }
+        }
     }
 }

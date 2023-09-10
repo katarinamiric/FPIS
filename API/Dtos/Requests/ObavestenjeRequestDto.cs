@@ -9,8 +9,8 @@ namespace API.Dtos.Requests
     {
         public string SvrhaObavestenja { get; set; }
         public DateTime Datum { get; set; }
-        public int OsiguravajucaKucaId { get; set; }
-        public int RadnikId { get; set; }
-        public int UplatnicaId { get; set; }
+        public int IdOsigKuce { get; set; }
+        public int SifraRadnika { get; set; }
+        public int IdUplatnice { get; set; }
     }
 }

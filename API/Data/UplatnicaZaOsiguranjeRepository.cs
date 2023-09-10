@@ -18,7 +18,7 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<List<UplatnicaZaOsiguranje>> FilterUplatnice(Expression<Func<UplatnicaZaOsiguranje, bool>> filter)
+        public async Task<List<UplatnicaZaOsiguranje>> FilterUplatnice(Expression<Func<UplatnicaZaOsiguranje, bool>>? filter)
         {
             var result = _context.UplatniceZaOsiguranje
                 .AsNoTracking()

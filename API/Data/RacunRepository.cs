@@ -63,5 +63,23 @@ namespace API.Data
             var response = await _context.SaveChangesAsync();
             return response;
         }
+
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        try
+        {
+            var racun = await _context.RacuniOsiguranja.FirstOrDefaultAsync(c => c.Id == id);
+            if (racun == null) return false;
+
+            _context.RacuniOsiguranja.Remove(racun);
+            var result = await _context.SaveChangesAsync();
+            return result > 0;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
     }
 }

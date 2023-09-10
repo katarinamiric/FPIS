@@ -28,14 +28,15 @@ namespace API.Services
 
 
 
-            var racun = new RacunOsiguranja()
-            {
-                PozivNaBroj = request.PozivNaBroj,
-                Datum = request.Datum,
-                BrUgovora = request.BrojUgovora,
-                IdNacinaPlacanja = request.NacinPlacanjaId,
-                SifraRadnika = request.SifraRadnika
-            };
+           var racun = new RacunOsiguranja
+                   {
+                       PozivNaBroj = request.PozivNaBroj,
+                       Datum = request.Datum,
+                       BrUgovora = request.BrojUgovora,
+                       IdNacinaPlacanja = request.NacinPlacanjaId,
+                       SifraRadnika = request.SifraRadnika,
+                       Iznos = request.Iznos
+                   };
 
             racun.Radnik = _racunRepository.GetRadnik(request.SifraRadnika);
             racun.Ugovor = _racunRepository.GetUgovor(request.BrojUgovora);
@@ -90,13 +91,14 @@ namespace API.Services
         public async Task<bool> UpdateRacun(int id, RacunRequestDto request)
         {
             var racunPostojeci = await _racunRepository.GetRacun(id);
-            var racun = new RacunOsiguranja()
-            {
-                PozivNaBroj = request.PozivNaBroj,
-                BrUgovora = request.BrojUgovora,
-                IdNacinaPlacanja = request.NacinPlacanjaId,
-                SifraRadnika = request.SifraRadnika,
-            };
+           var racun = new RacunOsiguranja
+                   {
+                       PozivNaBroj = request.PozivNaBroj,
+                       BrUgovora = request.BrojUgovora,
+                       IdNacinaPlacanja = request.NacinPlacanjaId,
+                       SifraRadnika = request.SifraRadnika,
+                       Iznos = request.Iznos = request.Iznos
+                   };
 
             foreach (var stavkaDto in request.Stavke)
             {
@@ -112,5 +114,21 @@ namespace API.Services
             var result = await _racunRepository.UpdateRacun(racun, racunPostojeci);
             return result > 0;
         }
+
+           public async Task<bool> DeleteAsync(int? id)
+            {
+                try
+                {
+                    if (!id.HasValue) throw new Exception("Id ne moze biti prazan");
+
+                    var result = await _racunRepository.DeleteAsync(id.Value);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Problem sa brisanjem racuna sa id: {id}");
+                }
+            }
+
     }
 }

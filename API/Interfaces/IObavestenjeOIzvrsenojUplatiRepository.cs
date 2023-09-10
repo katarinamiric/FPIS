@@ -12,5 +12,6 @@ namespace API.Interfaces
         Task<bool> AddObavestenje(ObavestenjeOIzvrsenojUplatiOsiguranja obavestenje, CancellationToken cancellationToken = new CancellationToken());
         Task<List<ObavestenjeOIzvrsenojUplatiOsiguranja>> getAllObavestenja(CancellationToken cancellationToken = new CancellationToken());
         Task<int> UpdateObavestenje(ObavestenjeOIzvrsenojUplatiOsiguranja postojeceObavestenje, CancellationToken cancellationToken = new CancellationToken());
+        Task<bool> DeleteAsync(int id);
     }
 }

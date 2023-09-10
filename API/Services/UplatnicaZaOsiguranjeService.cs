@@ -14,18 +14,30 @@ namespace API.Services
     public class UplatnicaZaOsiguranjeService : IUplatnicaZaOsiguranjeService
     {
         private readonly IUplatnicaZaOsiguranjeRepository _uplatnicaZaOsiguranjeRepository;
+
         public UplatnicaZaOsiguranjeService(IUplatnicaZaOsiguranjeRepository uplatnicaZaOsiguranjeRepository)
         {
             _uplatnicaZaOsiguranjeRepository = uplatnicaZaOsiguranjeRepository;
         }
-        public async Task<UplatnicaResponse> FilterUplatnice(UplatnicaParameters parameters)
+
+        public async Task<List<UplatnicaZaOsiguranjeDto>> FilterUplatnice(UplatnicaParameters parameters)
         {
-            Expression<Func<UplatnicaZaOsiguranje, bool>> filter = p => (p.Id == parameters.Id
-                || p.SvrhaUplate.Contains(parameters.SvrhaUplate) || p.Iznos == parameters.Iznos);
-            var uplatnice = await _uplatnicaZaOsiguranjeRepository.FilterUplatnice(filter);
+            Expression<Func<UplatnicaZaOsiguranje, bool>> filter = null;
+            if (parameters != null)
+            {
+                filter = p => parameters
+                    .SvrhaUplate != null && (p.Id == parameters.Id
+                                             || p.SvrhaUplate.Contains(parameters
+                                                 .SvrhaUplate) ||
+                                             p.Iznos == parameters.Iznos);
+            }
+
+            var uplatnice = await _uplatnicaZaOsiguranjeRepository.FilterUplatnice(filter ?? null);
             var uplatniceDto = new List<UplatnicaZaOsiguranjeDto>();
-            foreach (var uplatnica in uplatnice){
-                var uplatnicaDto = new UplatnicaZaOsiguranjeDto(){
+            foreach (var uplatnica in uplatnice)
+            {
+                var uplatnicaDto = new UplatnicaZaOsiguranjeDto()
+                {
                     Id = uplatnica.Id,
                     BrojRacuna = uplatnica.BrojRacuna,
                     Datum = uplatnica.Datum,
@@ -34,7 +46,7 @@ namespace API.Services
                 uplatniceDto.Add(uplatnicaDto);
             }
 
-            return new UplatnicaResponse(uplatniceDto);
+            return uplatniceDto;
         }
     }
 }

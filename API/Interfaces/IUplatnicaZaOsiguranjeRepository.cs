@@ -9,7 +9,7 @@ namespace API.Interfaces
 {
     public interface IUplatnicaZaOsiguranjeRepository
     {
-        Task<List<UplatnicaZaOsiguranje>> FilterUplatnice(Expression<Func<UplatnicaZaOsiguranje, bool>> filter); 
+        Task<List<UplatnicaZaOsiguranje>> FilterUplatnice(Expression<Func<UplatnicaZaOsiguranje, bool>>? filter = null);
         Task<UplatnicaZaOsiguranje> GetUplatica(int id);
     }
 }

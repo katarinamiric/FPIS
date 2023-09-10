@@ -44,7 +44,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet(Name = "GetObavestenje")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<ObavestenjeOIzvrsenojUplatiOsiguranjaDto>> Get(int id, [FromServices] IObavestenjeOIzvrsenojUplatiService obavestenjeOIzvrsenojUplatiService)
         {
             try
@@ -102,5 +102,37 @@ namespace API.Controllers
             }
 
         }
+
+        /// <summary>
+                /// Delete Obavestenje
+                /// </summary>
+                /// <param name="id"></param>
+                /// <param name="obavestenjeService"></param>
+                /// <returns></returns>
+                [ProducesResponseType((int)HttpStatusCode.OK)]
+                [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+                [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+                [HttpPost("Delete/{id:int}")]
+                public async Task<ActionResult<bool>> Delete(int id,
+                    [FromServices] IObavestenjeOIzvrsenojUplatiService obavestenjeService)
+                {
+                    try
+                    {
+                        if (!ModelState.IsValid)
+                        {
+                            return BadRequest("Error");
+                        }
+
+                        var result = await obavestenjeService.DeleteAsync(id);
+                        return Ok(result);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e.Message);
+                        return Problem();
+                    }
+                }
+
+
     }
 }

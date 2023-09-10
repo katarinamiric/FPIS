@@ -15,5 +15,6 @@ namespace API.Interfaces
         Task<RacunOsiguranja> GetRacun(int id);
         Task<int> UpdateRacun(RacunOsiguranja racun, RacunOsiguranja racunPostojeci);
         Task<List<RacunOsiguranja>> FilterRacuni();
+        Task<bool> DeleteAsync(int id);
     }
 }

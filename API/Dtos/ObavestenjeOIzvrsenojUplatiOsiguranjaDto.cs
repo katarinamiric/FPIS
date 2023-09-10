@@ -13,7 +13,7 @@ namespace API.Dtos
         public int IdUplatnice { get; set; }
         public int SifraRadnika { get; set; }
         public int IdOsigKuce { get; set; }
-        // public virtual RadnikDto Radnik { get; set; }
-        // public virtual OsiguravajucaKucaDto OsiguravajucaKuca { get; set; }
+        public RadnikDto Radnik { get; set; }
+        public OsiguravajucaKucaDto OsiguravajucaKuca { get; set; }
     }
 }

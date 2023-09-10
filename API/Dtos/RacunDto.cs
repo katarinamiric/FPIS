@@ -15,6 +15,9 @@ namespace API.Dtos
         public int? IdNacinaPlacanja { get; set; }
         public int? IdOsigKuce { get; set; }
         public int SifraRadnika { get; set; }
+        public UgovorDto Ugovor { get; set; }
+        public NacinPlacanjaDto NacinPlacanja { get; set; }
+        public RadnikDto Radnik { get; set; }
         public List<StavkaRacunaDto> Stavke { get; set; }
     }
 }

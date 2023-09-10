@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using API.Dtos;
 using API.Dtos.Requests;
 using API.Interfaces;
 using API.Responses;
@@ -13,7 +14,7 @@ using Microsoft.Extensions.Logging;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UplatnicaZaOsiguranjeController : ControllerBase
     {
         private readonly ILogger<UplatnicaZaOsiguranjeController> _logger;
@@ -26,7 +27,7 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [HttpGet("FilterUplatnice")]
-        public async Task<ActionResult<UplatnicaResponse>> FilterUplatnice([FromQuery] UplatnicaParameters parameters,
+        public async Task<ActionResult<List<UplatnicaZaOsiguranjeDto>>> FilterUplatnice(//[FromQuery] UplatnicaParameters parameters,
         [FromServices] IUplatnicaZaOsiguranjeService uplatnicaZaOsiguranjeService)
         {
 
@@ -37,7 +38,7 @@ namespace API.Controllers
 
             try
             {
-                var result = await uplatnicaZaOsiguranjeService.FilterUplatnice(parameters);
+                var result = await uplatnicaZaOsiguranjeService.FilterUplatnice(null);
                 return Ok(result);
             }
             catch (Exception e)

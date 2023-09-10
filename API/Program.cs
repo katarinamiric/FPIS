@@ -22,13 +22,16 @@ builder.Services.AddScoped<IRacunRepository, RacunRepository>();
 builder.Services.AddScoped<IRacunService, RacunService>();
 builder.Services.AddScoped<IUgovorRepository, UgovorRepository>();
 builder.Services.AddScoped<IUgovorService, UgovorService>();
-builder.Services.AddDbContext<ApplicationDbContext>(opt => {
+builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+{
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(x => x.AddProfile(new StavkaRacunaProfile()));
+builder.Services.AddCors();
+
 
 
 
@@ -46,6 +49,7 @@ var app = builder.Build();
 // app.UseHttpsRedirection();
 
 // app.UseAuthorization();
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("*"));
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapControllers();

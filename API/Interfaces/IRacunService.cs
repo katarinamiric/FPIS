@@ -14,5 +14,6 @@ namespace API.Interfaces
         Task<bool> AddRacun(RacunRequestDto request);
         Task<bool> UpdateRacun(int id, RacunRequestDto request);
         Task<RacunDto> GetRacun(int id);
+        Task<bool> DeleteAsync(int? id);
     }
 }

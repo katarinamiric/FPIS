@@ -55,5 +55,25 @@ namespace API.Data
 
             return await _context.SaveChangesAsync(cancellationToken);
         }
+
+         public async Task<bool> DeleteAsync(int id)
+                {
+                    try
+                    {
+                        var obavestenje = await _context.ObavestenjaOIzvrsenojUplatiOsiguranja.FirstOrDefaultAsync(c => c.Id == id);
+                        if (obavestenje == null)
+                        {
+                            return false;
+                        }
+
+                        _context.ObavestenjaOIzvrsenojUplatiOsiguranja.Remove(obavestenje);
+                        var result = await _context.SaveChangesAsync(new CancellationToken());
+                        return result > 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
+                }
     }
 }

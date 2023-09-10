@@ -9,5 +9,6 @@ namespace API.Interfaces
     public interface IRadnikService
     {
         Task<List<RadnikDto>> GetRadnici();
+        Task<List<NacinPlacanjaDto>> GetNaciniPlacanja();
     }
 }

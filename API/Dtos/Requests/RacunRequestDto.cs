@@ -13,6 +13,6 @@ namespace API.Dtos.Requests
         public int NacinPlacanjaId { get; set; }
         public int SifraRadnika { get; set; }
         public List<StavkaRacunaRequestDto> Stavke { get; set; }
-
+public double Iznos { get; set; }
     }
 }
