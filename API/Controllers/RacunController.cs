@@ -47,7 +47,7 @@ namespace API.Controllers
 
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [HttpGet("GetRacun")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<RacunDto>> GetRacun(int id, [FromServices] IRacunService racunService)
         {
 
@@ -90,7 +90,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<ActionResult<bool>> UpdateRacun(int id, [FromBody] RacunRequestDto request,
+        public async Task<ActionResult<bool>> UpdateRacun([FromQuery] int id, [FromBody] RacunRequestDto request,
             [FromServices] IRacunService racunService)
         {
             if (!ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        [HttpPost("Delete/{id:int}")]
+        [HttpDelete("Delete/{id:int}")]
         public async Task<ActionResult<bool>> Delete(int id,
             [FromServices] IRacunService racunService)
         {

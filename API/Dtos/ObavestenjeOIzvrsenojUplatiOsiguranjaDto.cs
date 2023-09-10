@@ -15,5 +15,6 @@ namespace API.Dtos
         public int IdOsigKuce { get; set; }
         public RadnikDto Radnik { get; set; }
         public OsiguravajucaKucaDto OsiguravajucaKuca { get; set; }
+        public UplatnicaZaOsiguranjeDto Uplatnica{ get; set; }
     }
 }

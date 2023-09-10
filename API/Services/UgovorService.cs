@@ -21,9 +21,9 @@ namespace API.Services
 
         public async Task<List<UgovorDto>> FilterUgovori(UgovorParameters parameters)
         {
-            Expression<Func<UgovorOOsiguranju, bool>> filter = p => (p.Id == parameters.BrojUgovora
-                || DateTime.Compare(parameters.Datum, p.Datum) == 0);
-            var ugovori = await _ugovorRepository.FilterUgovori(filter);
+            // Expression<Func<UgovorOOsiguranju, bool>> filter = p => (p.Id == parameters.BrojUgovora
+            //     || DateTime.Compare(parameters.Datum, p.Datum) == 0);
+            var ugovori = await _ugovorRepository.FilterUgovori();
             var ugovoriDto = new List<UgovorDto>();
             foreach (var ugovor in ugovori)
             {
