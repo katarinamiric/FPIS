@@ -28,7 +28,11 @@ namespace API.Data
             return data;
         }
 
-        public async Task<UplatnicaZaOsiguranje> GetUplatica(int id) => await _context.UplatniceZaOsiguranje
+        public async Task<UplatnicaZaOsiguranje?> GetUplatica(int? id)
+        {
+            if (!id.HasValue) return null;
+            return await _context.UplatniceZaOsiguranje
                 .FirstOrDefaultAsync(s => s.Id == id);
+        }
     }
 }

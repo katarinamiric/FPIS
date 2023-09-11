@@ -100,7 +100,6 @@ namespace API.Controllers
                 _logger.LogError(e.Message);
                 return Problem();
             }
-
         }
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace API.Controllers
                 [ProducesResponseType((int)HttpStatusCode.OK)]
                 [ProducesResponseType((int)HttpStatusCode.BadRequest)]
                 [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-                [HttpPost("Delete/{id:int}")]
+                [HttpDelete("Delete/{id:int}")]
                 public async Task<ActionResult<bool>> Delete(int id,
                     [FromServices] IObavestenjeOIzvrsenojUplatiService obavestenjeService)
                 {

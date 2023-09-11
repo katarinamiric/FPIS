@@ -10,8 +10,8 @@ namespace API.Entities
         public int Id { get; set; }
         public string SvrhaObavestenja { get; set; }
         public DateTime Datum { get; set; }
-        public int IdUplatnice { get; set; }
-        public virtual UplatnicaZaOsiguranje Uplatnica { get; set; }
+        public int? IdUplatnice { get; set; }
+        public virtual UplatnicaZaOsiguranje? Uplatnica { get; set; }
         public int IdRadnika { get; set; }
         public virtual Radnik Radnik { get; set; }
         public int IdOsiguravajuceKuce { get; set; }

@@ -11,8 +11,8 @@ namespace API.Entities
         public DateTime Datum { get; set; }
         public double Iznos { get; set; }
         public string PozivNaBroj { get; set; }
-        public int BrUgovora { get; set; }
-        public virtual UgovorOOsiguranju Ugovor { get; set; }
+        public int? BrUgovora { get; set; }
+        public virtual UgovorOOsiguranju? Ugovor { get; set; }
         public int? IdOsigKuce { get; set; }
         public virtual OsiguravajucaKuca OsiguravajucaKuca { get; set; }
         public int SifraRadnika { get; set; }

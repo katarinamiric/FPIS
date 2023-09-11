@@ -49,7 +49,7 @@ namespace API.Services
                 {
                     SvrhaObavestenja = obavestenje.SvrhaObavestenja,
                     Datum = obavestenje.Datum,
-                    IdUplatnice = obavestenje.Uplatnica.Id,
+                    IdUplatnice = obavestenje.Uplatnica?.Id,
                     IdOsigKuce = obavestenje.OsiguravajucaKuca.Id,
                     SifraRadnika = obavestenje.Radnik.Id,
                     Id = obavestenje.Id
@@ -72,6 +72,7 @@ namespace API.Services
                 Id = obavestenje.Id,
                 SvrhaObavestenja = obavestenje.SvrhaObavestenja,
                 Datum = obavestenje.Datum,
+                IdUplatnice = obavestenje.Uplatnica?.Id,
                 OsiguravajucaKuca = new OsiguravajucaKucaDto()
                 {
                     Id = obavestenje.OsiguravajucaKuca.Id,
@@ -83,6 +84,17 @@ namespace API.Services
                     Name = obavestenje.Radnik.ImePrezime
                 }
             };
+            if (obavestenje.Uplatnica != null)
+            {
+                obavestenjeDto.Uplatnica = new UplatnicaZaOsiguranjeDto()
+                {
+                    Id = obavestenje.Uplatnica.Id,
+                    BrojRacuna = obavestenje.Uplatnica.BrojRacuna,
+                    Datum = obavestenje.Uplatnica.Datum,
+                    SvrhaUplate = obavestenje.Uplatnica.SvrhaUplate,
+                    Iznos = obavestenje.Uplatnica.Iznos
+                };
+            }
 
             return obavestenjeDto;
         }

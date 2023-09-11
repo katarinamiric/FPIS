@@ -17,7 +17,7 @@ namespace API.Data
         public DbSet<Radnik> Radnici { get; set; }
         public DbSet<StavkaRacunaOsiguranja> StavkeRacunaOsiguranja { get; set; }
         public DbSet<RacunOsiguranja> RacuniOsiguranja { get; set; }
-        public DbSet<UgovorOOsiguranju> UgovoriOOsiguranju { get; set; }
+        public DbSet<UgovorOOsiguranju?> UgovoriOOsiguranju { get; set; }
         public DbSet<UplatnicaZaOsiguranje> UplatniceZaOsiguranje { get; set; }
         public DbSet<Valuta> Valute { get; set; }
         public DbSet<ZahtevZaOsiguranje> ZahteviZaOsiguranje { get; set; }

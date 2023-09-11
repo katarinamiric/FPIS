@@ -11,7 +11,7 @@ namespace API.Interfaces
         Task<bool> AddRacun(RacunOsiguranja racun);
         NacinPlacanja GetNacinPlacanja(int nacinPlacanjaId);
         Radnik GetRadnik(int radnikId);
-        UgovorOOsiguranju GetUgovor(int brojUgovora);
+        UgovorOOsiguranju? GetUgovor(int? brojUgovora);
         Task<RacunOsiguranja> GetRacun(int id);
         Task<int> UpdateRacun(RacunOsiguranja racun, RacunOsiguranja racunPostojeci);
         Task<List<RacunOsiguranja>> FilterRacuni();

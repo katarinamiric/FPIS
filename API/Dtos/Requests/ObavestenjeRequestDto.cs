@@ -11,6 +11,6 @@ namespace API.Dtos.Requests
         public DateTime Datum { get; set; }
         public int IdOsigKuce { get; set; }
         public int SifraRadnika { get; set; }
-        public int IdUplatnice { get; set; }
+        public int? IdUplatnice { get; set; }
     }
 }

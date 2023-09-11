@@ -9,6 +9,6 @@ namespace API.Interfaces
 {
     public interface IUgovorRepository
     {
-        Task<List<UgovorOOsiguranju>> FilterUgovori(Expression<Func<UgovorOOsiguranju, bool>> filter); 
+        Task<List<UgovorOOsiguranju>> FilterUgovori(); 
     }
 }

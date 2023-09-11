@@ -17,13 +17,13 @@ namespace API.Data
         {
             _context = context;
         }
-        public async Task<List<UgovorOOsiguranju>> FilterUgovori(Expression<Func<UgovorOOsiguranju, bool>> filter)
+        public async Task<List<UgovorOOsiguranju>> FilterUgovori()
         {
             var result = _context.UgovoriOOsiguranju
-                .Include(p => p.Drzava)
-                .Include(p => p.Radnik)
-                .Include(p => p.Zahtev)
-                .Where(filter ?? (s => true));
+                    .Include(p => p.Drzava)
+                    .Include(p => p.Radnik)
+                    .Include(p => p.Zahtev)
+                ;
 
             var data = await result.AsNoTracking().ToListAsync();
             return data;

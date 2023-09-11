@@ -9,10 +9,10 @@ namespace API.Dtos.Requests
     {
         public string PozivNaBroj { get; set; }
         public DateTime Datum { get; set; }
-        public int BrojUgovora { get; set; }
+        public int? BrojUgovora { get; set; }
         public int NacinPlacanjaId { get; set; }
         public int SifraRadnika { get; set; }
         public List<StavkaRacunaRequestDto> Stavke { get; set; }
-public double Iznos { get; set; }
+        public double Iznos { get; set; }
     }
 }

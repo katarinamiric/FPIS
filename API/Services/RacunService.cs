@@ -97,7 +97,8 @@ namespace API.Services
                        BrUgovora = request.BrojUgovora,
                        IdNacinaPlacanja = request.NacinPlacanjaId,
                        SifraRadnika = request.SifraRadnika,
-                       Iznos = request.Iznos = request.Iznos
+                       Iznos = request.Iznos,
+                       Datum = request.Datum
                    };
 
             foreach (var stavkaDto in request.Stavke)

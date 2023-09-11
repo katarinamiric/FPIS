@@ -52,7 +52,11 @@ namespace API.Data
 
         public Radnik GetRadnik(int radnikId) => _context.Radnici.Find(radnikId);
 
-        public UgovorOOsiguranju GetUgovor(int brojUgovora) => _context.UgovoriOOsiguranju.Find(brojUgovora);
+        public UgovorOOsiguranju? GetUgovor(int? brojUgovora)
+        {
+            if (!brojUgovora.HasValue) return null;
+            return _context.UgovoriOOsiguranju.Find(brojUgovora);
+        }
 
         public async Task<int> UpdateRacun(RacunOsiguranja racun, RacunOsiguranja racunPostojeci)
         {
