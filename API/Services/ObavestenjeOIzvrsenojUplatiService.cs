@@ -82,6 +82,14 @@ namespace API.Services
                 {
                     Id = obavestenje.Radnik.Id,
                     Name = obavestenje.Radnik.ImePrezime
+                },
+                Uplatnica = new UplatnicaZaOsiguranjeDto()
+                {
+                    Id = obavestenje.Uplatnica.Id,
+                    BrojRacuna = obavestenje.Uplatnica.BrojRacuna,
+                    Datum = obavestenje.Uplatnica.Datum,
+                    SvrhaUplate = obavestenje.Uplatnica.SvrhaUplate,
+                    Iznos = obavestenje.Uplatnica.Iznos
                 }
             };
             if (obavestenje.Uplatnica != null)
